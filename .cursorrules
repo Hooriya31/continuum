@@ -1,0 +1,52 @@
+# .cursorrules
+
+Guidance for Cursor's AI (and future me) when working in this repo.
+
+## Project
+Continuum — an AI-powered work-memory tool. Users save a quick free-text
+note before stopping work; AI structures it into Completed / Next Steps /
+Open Questions / Context Summary. When they return, Continuum generates a
+short "welcome back" briefing so they can resume without reconstructing
+their train of thought. Capstone project for the FlyRank Frontend AI
+Engineering track.
+
+## Stack
+- Next.js (App Router), JavaScript/TypeScript
+- Tailwind CSS for styling
+- Supabase for auth + Postgres database, with row-level security enforced
+  at the database level (users only ever query their own rows)
+- LLM API (Gemini free tier by default) — called only from server-side API
+  routes, never from client components. API key must never reach the browser.
+- Deployment target: Vercel
+
+## Data model (initial)
+- `projects` — id, user_id, name, created_at
+- `context_snapshots` — id, project_id, raw_note, structured_output (JSON:
+  completed/next_steps/open_questions/summary), created_at
+
+## Conventions
+- **Commits:** Conventional Commits format (`feat:`, `fix:`, `chore:`,
+  `docs:`, `refactor:`, `test:`) — one logical change per commit.
+- **Components:** functional components only. Keep them small and
+  accessible — semantic HTML first, ARIA only when semantic HTML can't do
+  the job. Every interactive element must be keyboard-reachable.
+- **API routes:** all AI calls go through `/app/api/*` routes. No API keys
+  or secrets in client-side code, ever.
+- **Cost control:** AI should be called at most twice per work session
+  (save context, generate resume briefing) — never a continuous chat loop.
+  Rate-limit AI calls per user.
+- **Errors:** every AI call must handle loading, error, and empty states
+  explicitly — if the AI call fails, the user's raw note must still be
+  saved unstructured rather than lost. No silent failures.
+- **Testing:** components should be written in a testable way from the
+  start (Jest or Vitest) — target ≥50% coverage by the capstone deadline,
+  not retrofitted at the end.
+
+## What I want from Cursor's AI in this repo
+- Point out accessibility issues (missing labels, poor contrast, no
+  keyboard support) even if I didn't ask.
+- Flag if a change would leak a secret to the client or skip row-level
+  security on a new table/query.
+- Flag if a change would add an unnecessary AI call (cost/burden risk).
+- Prefer explaining a fix over silently rewriting large chunks of code —
+  I need to be able to defend every line of this project.
