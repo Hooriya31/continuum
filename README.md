@@ -40,10 +40,23 @@ Students, developers, freelancers, and anyone juggling multiple unfinished proje
 - Per-user rate limiting to prevent runaway API usage
 
 ## Getting started
+
+There is no app in this repo yet — Status is Week 1 (environment setup), so there is no `package.json` and `npm install` will fail. Come back here once the Next.js scaffold is committed.
+
+When the app exists, you will need:
+
+- Node.js 20 LTS (or current LTS)
+- A [Supabase](https://supabase.com) project (auth + Postgres)
+- A [Gemini API key](https://aistudio.google.com/apikey) (server-side only; never put it in client code)
+
+Then:
+
 ```bash
 npm install
 npm run dev
 ```
+
+Copy env vars into `.env.local` (do not commit it). An `.env.example` with the exact names will be added with the scaffold.
 
 ## License
 MIT — see [LICENSE](./LICENSE).
