@@ -13,7 +13,7 @@ Switching between tasks — studying, coding, writing, designing — means losin
 Students, developers, freelancers, and anyone juggling multiple unfinished projects at once.
 
 ## Status
-🚧 In development — Week 1 (environment setup).
+🚧 In development — project create form is in place (local storage until auth + Supabase).
 
 ## Stack
 - **Framework:** Next.js (App Router)
@@ -41,22 +41,14 @@ Students, developers, freelancers, and anyone juggling multiple unfinished proje
 
 ## Getting started
 
-There is no app in this repo yet — Status is Week 1 (environment setup), so there is no `package.json` and `npm install` will fail. Come back here once the Next.js scaffold is committed.
-
-When the app exists, you will need:
-
 - Node.js 20 LTS (or current LTS)
-- A [Supabase](https://supabase.com) project (auth + Postgres)
-- A [Gemini API key](https://aistudio.google.com/apikey) (server-side only; never put it in client code)
-
-Then:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Copy env vars into `.env.local` (do not commit it). An `.env.example` with the exact names will be added with the scaffold.
+Open [http://localhost:3000](http://localhost:3000). Creating a project currently saves to this browser’s local storage. Auth, Supabase (with row-level security), and Gemini are not wired yet — copy `.env.example` to `.env.local` when those are added. Do not put `GEMINI_API_KEY` in client code.
 
 ## License
 MIT — see [LICENSE](./LICENSE).
