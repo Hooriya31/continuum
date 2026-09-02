@@ -50,3 +50,9 @@ Engineering track.
 - Flag if a change would add an unnecessary AI call (cost/burden risk).
 - Prefer explaining a fix over silently rewriting large chunks of code —
   I need to be able to defend every line of this project.
+
+## Rules learned from FE-03 (vague vs. precise prompting drill)
+
+- Never substitute localStorage or any client-only storage for a feature that touches user data, even temporarily — this app's persistence model is Supabase with row-level security, no exceptions. If Supabase isn't wired up yet, stop and say so instead of shipping a workaround. (Testable: any PR touching data persistence must show a Supabase call, not a browser storage API.)
+- Before referencing an existing file as a convention to follow (e.g. "match the pattern in X"), confirm that file actually exists in the repo. If it doesn't, say so explicitly rather than inventing a plausible-looking substitute. (Testable: a prompt or PR description citing a reference file should be checked against the actual file tree.)
+- Every new feature must ship with tests naming the specific cases they cover (e.g. "valid input," "empty name," "over the length limit") — not just "tests added." A test count with no named cases doesn't tell a reviewer what was actually verified. (Testable: PR description must list what each test checks, not just how many passed.)
